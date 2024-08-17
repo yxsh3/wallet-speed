@@ -8,7 +8,7 @@ import { useState } from "react";
 import WalletBox from "./WalletBox";
 import axios from "axios";
 
-export default function Navbar({ walletSeed, setWalletSeed, wallets, setWallets, showWallet, setShowWallet }) {
+export default function Navbar({ netConnect, walletSeed, setWalletSeed, wallets, setWallets, showWallet, setShowWallet }) {
     const [wallet, setWallet] = useState({
         publicKey: "",
         privateKey: "",
@@ -35,7 +35,7 @@ export default function Navbar({ walletSeed, setWalletSeed, wallets, setWallets,
     const getBalance = async (wallet) => {
         try {
             const apiKey = import.meta.env.VITE_SOLANA_API_KEY;
-            const response = await axios.post(apiKey, {
+            const response = await axios.post(`https://solana-${netConnect}.g.alchemy.com/v2/${apiKey}`, {
                 "jsonrpc": "2.0",
                 "id": 1,
                 "method": "getBalance",

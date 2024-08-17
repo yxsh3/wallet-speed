@@ -8,6 +8,7 @@ function App() {
   const [walletSeed, setWalletSeed] = useState(null);
   const [wallets, setWallets] = useState([]);
   const [showWallet, setShowWallet] = useState(false);
+  const [netConnect, setNetConnect] = useState("devnet");
 
   useEffect(() => {
     const data = localStorage.getItem('wallet');
@@ -35,11 +36,11 @@ function App() {
 
   return (
     <div>
-      <TopBar></TopBar>
+      <TopBar setNetConnect={setNetConnect}></TopBar>
       <div className="px-9">
         <MnemonicBox walletSeed={walletSeed} setWalletSeed={setWalletSeed} setWallets={setWallets} setShowWallet={setShowWallet}></MnemonicBox>
         <hr />
-        <Navbar walletSeed={walletSeed} setWalletSeed={setWalletSeed} wallets={wallets} setWallets={setWallets} showWallet={showWallet} setShowWallet={setShowWallet}></Navbar>
+        <Navbar netConnect={netConnect} walletSeed={walletSeed} setWalletSeed={setWalletSeed} wallets={wallets} setWallets={setWallets} showWallet={showWallet} setShowWallet={setShowWallet}></Navbar>
       </div> 
     </div>
   )
