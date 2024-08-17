@@ -8,7 +8,7 @@ export default function WalletBox({ balance, wallet, showWallet, setShowWallet, 
 
     return (
         <div className="mt-2 flex-col">
-            {!showWallet && <div className="flex items-center justify-center mt-10">
+            {!showWallet && <div className="flex items-center justify-center mt-10 mb-24">
                 <h2 className="text-gray-500 text-2xl">
                     {wallets.length < 1 ? "Add a Wallet from Your Wallets" : "Select a Wallet"}
                 </h2>

@@ -3,6 +3,7 @@ import MnemonicBox from "./components/MnemonicBox"
 import Navbar from "./components/Navbar"
 import TopBar from "./components/TopBar"
 import WalletBox from "./components/WalletBox"
+import Footer from "./components/Footer"
 
 function App() {
   const [walletSeed, setWalletSeed] = useState(null);
@@ -42,6 +43,8 @@ function App() {
         <hr />
         <Navbar netConnect={netConnect} walletSeed={walletSeed} setWalletSeed={setWalletSeed} wallets={wallets} setWallets={setWallets} showWallet={showWallet} setShowWallet={setShowWallet}></Navbar>
       </div> 
+      <hr />
+      <Footer></Footer>
     </div>
   )
 }
