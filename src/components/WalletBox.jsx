@@ -2,6 +2,7 @@ import { useState } from "react";
 import CustomButton from "./CutomButton";
 import DialogBox from "./DialogBox";
 import { toast } from "sonner";
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 export default function WalletBox({ balance, wallet, showWallet, setShowWallet, wallets, setWallets }) {
 
@@ -37,7 +38,7 @@ export default function WalletBox({ balance, wallet, showWallet, setShowWallet, 
 
                 <div className="flex-col">
                     <h3 className="text-neutral-600 font-semibold">Total Balance</h3>
-                    <h1 className="text-4xl text-slate-950">$ {balance}</h1>
+                    <h1 className="text-4xl text-slate-950">{balance/LAMPORTS_PER_SOL} SOL</h1>
                 </div>
 
                 <div className="flex items-center justify-center m-10">
