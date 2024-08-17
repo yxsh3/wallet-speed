@@ -8,10 +8,15 @@ import { useState } from "react";
 import WalletBox from "./WalletBox";
 
 
-export default function Navbar( {walletSeed, wallets, setWallets, setShowWallet} ) {
+export default function Navbar({ walletSeed, setWalletSeed, wallets, setWallets, showWallet, setShowWallet }) {
+    const [wallet, setWallet] = useState({
+        publicKey: "",
+        privateKey: "",
+        index: 0
+    })
 
     const createWallet = () => {
-        if(!walletSeed) return;
+        if (!walletSeed) return;
         const path = `m/44'/501'/${wallets.length}'/0'`;
         const derivedSeed = derivePath(path, walletSeed?.seed.toString("hex")).key;
         const secretKey = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
@@ -27,18 +32,23 @@ export default function Navbar( {walletSeed, wallets, setWallets, setShowWallet}
         toast.success('New Wallet is added')
     }
 
-    const openWallet = () => {
+    const openWallet = (w, index) => {
         setShowWallet(true);
+        setWallet({
+            publicKey: w.publicKey,
+            privateKey: w.privateKey,
+            index: index
+        });
     }
 
     return (
         <div className="flex-col mb-4">
             <h3 className="text-xl text-purple-900">Your Wallets</h3>
-            <div className="flex justify-between mt-2">
+            <div className="flex justify-between mt-2 mb-4">
                 <div className="flex gap-2 flex-nowrap">
-                    {wallets.map((_, index) => {
-                        return <div onClick={openWallet} className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-300 cursor-pointer" key={index}>
-                            {index+1}
+                    {wallets.map((w, index) => {
+                        return <div onClick={() => openWallet(w, index)} className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-300 cursor-pointer" key={index}>
+                            {index + 1}
                         </div>
                     })}
                     <div className="cursor-pointer" onClick={createWallet}>
@@ -50,9 +60,13 @@ export default function Navbar( {walletSeed, wallets, setWallets, setShowWallet}
                 </div>
                 <CustomButton text="Clear Wallets" onClick={() => {
                     setWallets([])
+                    setWalletSeed(null)
+                    localStorage.removeItem("wallet")
                     setShowWallet(false)
                 }}></CustomButton>
             </div>
+            <hr />
+            <WalletBox wallet={wallet} showWallet={showWallet} setShowWallet={setShowWallet} wallets={wallets} setWallets={setWallets}></WalletBox>
         </div>
     )
 }

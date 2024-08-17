@@ -40,9 +40,7 @@ function App() {
       <div className="px-9">
         <MnemonicBox walletSeed={walletSeed} setWalletSeed={setWalletSeed} setWallets={setWallets} setShowWallet={setShowWallet}></MnemonicBox>
         <hr />
-        <Navbar walletSeed={walletSeed} wallets={wallets} setWallets={setWallets} setShowWallet={setShowWallet}></Navbar>
-        <hr />
-        <WalletBox showWallet={showWallet}></WalletBox>
+        <Navbar walletSeed={walletSeed} setWalletSeed={setWalletSeed} wallets={wallets} setWallets={setWallets} showWallet={showWallet} setShowWallet={setShowWallet}></Navbar>
       </div> 
     </div>
   )
