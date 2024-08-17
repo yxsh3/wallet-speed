@@ -2,7 +2,7 @@
 export default function TopBar( {setNetConnect} ) {
     return (
         <div className="flex justify-between px-9 py-4 border shadow-sm">
-            <h1 className="text-2xl text-violet-900 font-bold">Speed</h1>
+            <h1 className="text-2xl text-violet-900 font-bold cursor-pointer">Speed</h1>
 
             <div>
                 <form className="max-w-sm mx-auto">
