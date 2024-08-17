@@ -48,7 +48,10 @@ export default function Navbar( {walletSeed, wallets, setWallets, setShowWallet}
 
                     </div>
                 </div>
-                <CustomButton text="Clear Wallets"></CustomButton>
+                <CustomButton text="Clear Wallets" onClick={() => {
+                    setWallets([])
+                    setShowWallet(false)
+                }}></CustomButton>
             </div>
         </div>
     )
