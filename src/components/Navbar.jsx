@@ -6,6 +6,7 @@ import bs58 from "bs58";
 import { toast } from "sonner";
 import { useState } from "react";
 import WalletBox from "./WalletBox";
+import axios from "axios";
 
 
 export default function Navbar({ walletSeed, setWalletSeed, wallets, setWallets, showWallet, setShowWallet }) {
@@ -14,6 +15,7 @@ export default function Navbar({ walletSeed, setWalletSeed, wallets, setWallets,
         privateKey: "",
         index: 0
     })
+    const [balance, setBalance] = useState("");
 
     const createWallet = () => {
         if (!walletSeed) return;
@@ -28,11 +30,29 @@ export default function Navbar({ walletSeed, setWalletSeed, wallets, setWallets,
                 privateKey: bs58.encode(secretKey)
             }]
         })
-        console.log(wallets);
         toast.success('New Wallet is added')
     }
 
+    const getBalance = async (wallet) => {
+        try {
+            const response = await axios.post("https://solana-mainnet.g.alchemy.com/v2/u5saHhMIYRyuOaUfc-HAZgJ20sZKrCeJ", {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "getBalance",
+                "params": [wallet.publicKey]
+            }, {
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+            })
+            setBalance(response.data.result.value)
+        } catch (error) {
+            toast.error('Request Failed')
+        }
+    }
+
     const openWallet = (w, index) => {
+        getBalance(w);
         setShowWallet(true);
         setWallet({
             publicKey: w.publicKey,
@@ -66,7 +86,7 @@ export default function Navbar({ walletSeed, setWalletSeed, wallets, setWallets,
                 }}></CustomButton>
             </div>
             <hr />
-            <WalletBox wallet={wallet} showWallet={showWallet} setShowWallet={setShowWallet} wallets={wallets} setWallets={setWallets}></WalletBox>
+            <WalletBox wallet={wallet} balance={balance} showWallet={showWallet} setShowWallet={setShowWallet} wallets={wallets} setWallets={setWallets}></WalletBox>
         </div>
     )
 }

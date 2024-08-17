@@ -3,12 +3,14 @@ import CustomButton from "./CutomButton";
 import DialogBox from "./DialogBox";
 import { toast } from "sonner";
 
-export default function WalletBox({ wallet, showWallet, setShowWallet, wallets, setWallets }) {
+export default function WalletBox({ balance, wallet, showWallet, setShowWallet, wallets, setWallets }) {
 
     return (
         <div className="mt-2 flex-col">
             {!showWallet && <div className="flex items-center justify-center mt-10">
-                <h2 className="text-gray-500 text-2xl">Select a Wallet</h2>
+                <h2 className="text-gray-500 text-2xl">
+                    {wallets.length < 1 ? "Add a Wallet from Your Wallets" : "Select a Wallet"}
+                </h2>
             </div>}
             {showWallet && <div>
                 <div className="flex-col my-4">
@@ -35,7 +37,7 @@ export default function WalletBox({ wallet, showWallet, setShowWallet, wallets, 
 
                 <div className="flex-col">
                     <h3 className="text-neutral-600 font-semibold">Total Balance</h3>
-                    <h1 className="text-4xl text-slate-950">$0.0049</h1>
+                    <h1 className="text-4xl text-slate-950">$ {balance}</h1>
                 </div>
 
                 <div className="flex items-center justify-center m-10">
