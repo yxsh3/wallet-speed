@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar"
 import TopBar from "./components/TopBar"
 import WalletBox from "./components/WalletBox"
 
-
 function App() {
   const [walletSeed, setWalletSeed] = useState(null);
   const [wallets, setWallets] = useState([]);
