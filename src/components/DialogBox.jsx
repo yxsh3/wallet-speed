@@ -63,7 +63,7 @@ export default function DialogBox({ wallet, setShowWallet, wallets, setWallets }
                                 </Button>
                             </div>
                             <div className="flex gap-2 py-2 text-neutral-500">
-                                <input className='w-full text-wrap' type="text" value={key} />
+                                <input className='w-full text-wrap' type="text" defaultValue={key} readOnly />
                                 <div className="cursor-pointer" onClick={(e) => {
                                     try {
                                         console.log("Copied")

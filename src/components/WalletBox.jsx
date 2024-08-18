@@ -3,6 +3,7 @@ import CustomButton from "./CutomButton";
 import DialogBox from "./DialogBox";
 import { toast } from "sonner";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import SendSol from "./SendSol";
 
 export default function WalletBox({ balance, wallet, showWallet, setShowWallet, wallets, setWallets }) {
 
@@ -41,9 +42,12 @@ export default function WalletBox({ balance, wallet, showWallet, setShowWallet, 
                     <h1 className="text-4xl text-slate-950">{balance/LAMPORTS_PER_SOL} SOL</h1>
                 </div>
 
-                <div className="flex items-center justify-center m-10">
-                    <CustomButton text="Send SOL"></CustomButton>
+                <div>
+                    <SendSol wallet={wallet} ></SendSol>
                 </div>
+                {/* <div className="flex items-center justify-center m-10">
+                    <CustomButton text="Send SOL"></CustomButton>
+                </div> */}
             </div>}
         </div>
     )

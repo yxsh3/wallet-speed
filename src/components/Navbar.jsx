@@ -52,13 +52,13 @@ export default function Navbar({ netConnect, walletSeed, setWalletSeed, wallets,
     }
 
     const openWallet = (w, index) => {
-        getBalance(w);
         setShowWallet(true);
         setWallet({
             publicKey: w.publicKey,
             privateKey: w.privateKey,
             index: index
         });
+        getBalance(w);
     }
 
     return (
