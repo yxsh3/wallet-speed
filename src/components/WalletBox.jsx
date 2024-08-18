@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import SendSol from "./SendSol";
 
-export default function WalletBox({ balance, wallet, showWallet, setShowWallet, wallets, setWallets }) {
+export default function WalletBox({ netConnect, balance, setBalance, wallet, showWallet, setShowWallet, wallets, setWallets }) {
 
     return (
         <div className="mt-2 flex-col">
@@ -43,7 +43,7 @@ export default function WalletBox({ balance, wallet, showWallet, setShowWallet, 
                 </div>
 
                 <div>
-                    <SendSol wallet={wallet} ></SendSol>
+                    <SendSol wallet={wallet} netConnect={netConnect} balance={balance} setBalance={setBalance} ></SendSol>
                 </div>
                 {/* <div className="flex items-center justify-center m-10">
                     <CustomButton text="Send SOL"></CustomButton>

@@ -4,7 +4,7 @@ import { derivePath } from "ed25519-hd-key";
 import { Keypair } from "@solana/web3.js";
 import bs58 from "bs58";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import WalletBox from "./WalletBox";
 import axios from "axios";
 
@@ -32,7 +32,7 @@ export default function Navbar({ netConnect, walletSeed, setWalletSeed, wallets,
         toast.success('New Wallet is added')
     }
 
-    const getBalance = async (wallet) => {
+    const getBalance = useCallback(async (wallet) => {
         try {
             const apiKey = import.meta.env.VITE_SOLANA_API_KEY;
             const response = await axios.post(`https://solana-${netConnect}.g.alchemy.com/v2/${apiKey}`, {
@@ -49,7 +49,7 @@ export default function Navbar({ netConnect, walletSeed, setWalletSeed, wallets,
         } catch (error) {
             toast.error('Request Failed')
         }
-    }
+    }, [wallet]);
 
     const openWallet = (w, index) => {
         setShowWallet(true);
@@ -86,7 +86,7 @@ export default function Navbar({ netConnect, walletSeed, setWalletSeed, wallets,
                 }}></CustomButton>
             </div>
             <hr />
-            <WalletBox wallet={wallet} balance={balance} showWallet={showWallet} setShowWallet={setShowWallet} wallets={wallets} setWallets={setWallets}></WalletBox>
+            <WalletBox netConnect={netConnect} wallet={wallet} balance={balance} setBalance={setBalance} showWallet={showWallet} setShowWallet={setShowWallet} wallets={wallets} setWallets={setWallets}></WalletBox>
         </div>
     )
 }
